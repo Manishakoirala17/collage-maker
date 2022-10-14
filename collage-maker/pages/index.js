@@ -27,10 +27,10 @@ export default function Home() {
     const id = event.dataTransfer.getData("text");
     console.log("id", id);
     if (id == "layout1") {
-      setComponents(<Layout1 className="addFile"></Layout1>);
+      setComponents(<Layout1 isShowContent={true}></Layout1>);
     }
     if (id == "layout2") {
-      setComponents(<Layout2 className="addFile"></Layout2>);
+      setComponents(<Layout2 isShowContent={true}></Layout2>);
     }
   }
   return (

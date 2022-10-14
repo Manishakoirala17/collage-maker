@@ -23,9 +23,18 @@
     padding: 18px;
     font-size: 20px;
 }
-.fileContainer .content{
+.file1{
+    display: none;
+}
+.showImage{
+    display: block;
+}
+.hideImage{
+    display: none;
+}
+/* .fileContainer .content{
     display: none;
 }
 .addFile .content{
     display: block;
-}
+} */

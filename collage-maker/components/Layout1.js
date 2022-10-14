@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import styles from "./../styles/Layout1.module.css";
-export default function Layout1({ onDragStart, className }) {
-  const [file1, setFile1] = useState("");
+import Content from "./contentLayout";
+export default function Layout1({ onDragStart, className, isShowContent }) {
+  const [file1, setFile1] = useState();
+  // "blob:http://localhost:3000/21ae571b-b1fb-4973-b8fc-62c9886052e3"
+  const [val, setVal] = useState();
   function handleClick() {
+    console.log("1");
+    // setVal("dasdad");
     document.getElementById("file").click();
   }
-  function fileOnChange(e) {
-    setFile1(e.target.value);
-    console.log(e.target.value);
+  function handleChange(e) {
+    // console.log("2");
+    let fileUrl = URL.createObjectURL(e.target.files[0]);
+    // setVal("hai");
+    console.log(fileUrl, "url");
+    console.log("HAndle change");
+    setFile1(fileUrl);
+    // alert(fileUrl);
+    // alert(file1);
   }
 
   return (
@@ -20,29 +32,25 @@ export default function Layout1({ onDragStart, className }) {
       <input
         type="file"
         id="file"
-        onChange={fileOnChange}
-        multiple
-        hidden
+        onChange={handleChange}
         accept="image*/"
+        hidden
       ></input>
       <div className={`${styles.fileContainer} ${styles[className]}`}>
-        <div className={styles.content}>
-          {file1.length == 0 ? (
-            <button onClick={handleClick}>+</button>
-          ) : (
-            <p>hai</p>
-          )}
-        </div>
+        {isShowContent ? (
+          <div>
+            <Content fileUrl={file1} handleClick={handleClick}></Content>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className={`${styles.fileContainer} ${styles[className]}`}>
-        <div className={styles.content}>
-          {" "}
-          {file1.length == 0 ? (
-            <button onClick={handleClick}>+</button>
-          ) : (
-            <p>hai</p>
-          )}
-        </div>
+        {isShowContent ? (
+          <Content fileUrl={file1} handleClick={handleClick}></Content>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
